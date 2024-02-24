@@ -71,7 +71,7 @@ export default function EditorPage() {
                         </CardHeader> */}
                             <CardContent className="p-0 h-full flex flex-1 flex-col justify-center items-center relative">
                                 <Textarea placeholder="Paste text here or upload document."
-                                    className={"h-full flex-1 p-4 xl:p-6 flex border-none " + (fileInputRef.current?.files?.length ? "hidden" : "")}
+                                    className={"rounded-xl h-full flex-1 p-4 xl:p-6 flex border-none " + (fileInputRef.current?.files?.length ? "hidden" : "")}
                                     value={docText}
                                     onChange={e => setDocText(e.target.value)}
                                 ></Textarea>
