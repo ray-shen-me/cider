@@ -15,8 +15,9 @@ export async function generateEvents(text: string): Promise<CalendarEvents> {
                 content:
                     `You are an event planning assistant helping a user create calendar events from a document they will provide to you.
                     Today is ${new Date().toDateString()}.
-                    Please list the events described in the document, and respond with a JSON array following the JSON schema below, and if no events are found, respond with an empty array: 
-                    ${schemaString}`
+                    Respond with a JSON object with these *exact* properties:
+                    - "events": an array of events, each exactly following the JSON schema below, or an empty array if no events are found.
+                    For each event in "events", use the following schema: ${schemaString}`
             },
             {
                 role: 'user',
