@@ -18,6 +18,8 @@ import { CalendarEvent } from "@/lib/types";
 import { Input } from "@/components/ui/input";
 import EventCard from "@/components/event-card";
 import pdf from '@cyber2024/pdf-parse-fixed';
+import * as ics from 'ics';
+import { addressEnricher } from "@/lib/enricher";
 
 export default function EditorPage() {
     const [docText, setDocText] = useState("");
@@ -41,6 +43,49 @@ export default function EditorPage() {
         console.log(events)
     }
 
+    // function convertToICS(event: CalendarEvent){
+    //     if(event.location != null)
+    //         const enriched = await addressEnricher(event.location);
+    //     if(event.duration != null)
+    //     const details: ics.EventAttributes = {
+    //         start: event.start.toLocaleString(),
+    //         duration: event.duration,
+    //         title: event.title,
+    //         description: event.description,
+    //         location: enriched.address,
+            
+    
+
+
+
+    //     }
+
+    // }
+
+
+    const submitInfo = async () => {
+        /*
+        const event = {
+            start: [2018, 5, 30, 6, 30],
+            duration: { hours: 6, minutes: 30 },
+            title: 'Bolder Boulder',
+            description: 'Annual 10-kilometer run in Boulder, Colorado',
+            location: 'Folsom Field, University of Colorado (finish line)',
+            url: 'http://www.bolderboulder.com/',
+            geo: { lat: 40.0095, lon: 105.2669 },
+            categories: ['10k races', 'Memorial Day Weekend', 'Boulder CO'],
+            status: 'CONFIRMED',
+            busyStatus: 'BUSY',
+            organizer: { name: 'Admin', email: 'Race@BolderBOULDER.com' },
+            attendees: [
+              { name: 'Adam Gibbons', email: 'adam@example.com', rsvp: true, partstat: 'ACCEPTED', role: 'REQ-PARTICIPANT' },
+              { name: 'Brittany Seaton', email: 'brittany@example2.org', dir: 'https://linkedin.com/in/brittanyseaton', role: 'OPT-PARTICIPANT' }
+            ]
+          }
+          */
+
+    }
+
     const onFileInputChange = async () => {
         if (!fileInputRef.current) return;
         if (!fileInputRef.current.files || fileInputRef.current.files.length == 0) return;
@@ -60,6 +105,9 @@ export default function EditorPage() {
                 <Button className="text-sm" onClick={generateEvents}>
                     <Sparkles className="mr-2 h-4 w-4" />
                     Generate <span className="xs:hidden">&nbsp;Events</span>
+                </Button>
+                <Button className="text-sm" onClick={submitInfo}>
+                    Submit
                 </Button>
             </div>
             <div className="flex flex-col flex-grow items-start gap-6">
