@@ -27,6 +27,7 @@ export type CalendarEvent = {
     }
     /** Do not include if not directly specified, will be enriched with API later. */
     geo?: { lat: number; long: number };
+    /** Do not include if not directly specified. */
     url?: string;
     /** Determine appropriate status based on event. */
     busyStatus?: "FREE" | "BUSY" | "TENTATIVE";

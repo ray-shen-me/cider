@@ -102,23 +102,16 @@ export default function EditorPage() {
                     <Sparkles className="mr-2 h-4 w-4" />
                     Generate <span className="xs:hidden">&nbsp;Events</span>
                 </Button>
-                <Button className="text-sm" onClick={submitInfo}>
-                    Submit
-                </Button>
+
             </div>
             <div className="flex flex-col flex-grow items-start gap-6">
                 <div className="flex flex-1 max-md:flex-col lg:flex-row mx-auto w-full min-w-0 gap-4 lg:gap-6">
                     <div className="flex flex-col flex-1 gap-4">
-                        <Card className="flex flex-col flex-1 w-full">
-                            {/* <CardHeader className="flex flex-row justify-between gap-4 pb-0 items-center">
-                            <CardTitle className="text-md font-semibold leading-none tracking-tight">
-                                Paste or upload document
-                            </CardTitle>
 
-                        </CardHeader> */}
+                        <Card className="flex flex-col flex-1 w-full">
                             <CardContent className="p-0 h-full flex flex-1 flex-col justify-center items-center relative">
                                 <Textarea placeholder="Paste text here or upload document."
-                                    className={"rounded-xl h-full flex-1 p-4 xl:p-6 flex border-none " + (fileInputRef.current?.files?.length ? "hidden" : "")}
+                                    className={"rounded-xl h-full flex-1 p-6 flex border-none " + (fileInputRef.current?.files?.length ? "hidden" : "")}
                                     value={docText}
                                     onChange={e => setDocText(e.target.value)}
                                 ></Textarea>
@@ -148,14 +141,13 @@ export default function EditorPage() {
 
 
                     </div>
-                    <div className="flex flex-col gap-4 md:w-64 lg:w-96">
-                        {/* <div className="flex flex-row justify-between items-center">
-                                <h2 className="text-md font-semibold leading-none tracking-tight flex-1">Events</h2>
-                                <Button className="text-sm">
-                                    <Sparkles className="mr-2 h-4 w-4" />
-                                    Generate
-                                </Button>
-                            </div> */}
+                    <div className="flex flex-col gap-4 md:w-64 lg:w-96 items-end">
+                        <div className={"md:hidden " + (!events?.length ? "hidden" : "")}>
+                            <Button className="text-sm" onClick={submitInfo}>
+                                Export
+                            </Button>
+                        </div>
+
 
                         {events?.map((event, index) => { //Meeting with Ray Shen Tomorrow to work on Project at Oakton High School
                             return <EventCard
