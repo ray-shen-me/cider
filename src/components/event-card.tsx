@@ -13,7 +13,7 @@ import { CalendarEvent } from "@/lib/types";
 import { Input } from "@/components/ui/input";
 import { Button } from "./ui/button";
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "./ui/dialog";
-import { EditIcon, MapPinIcon } from "lucide-react";
+import { EditIcon, Link2Icon, MapPinIcon } from "lucide-react";
 import { Label } from "./ui/label";
 
 export default function EventCard(props: { event: CalendarEvent }) {
@@ -39,12 +39,25 @@ export default function EventCard(props: { event: CalendarEvent }) {
                     </CardHeader>
 
                     <CardContent>
-                        {event.location ?
-                            <div className="flex flex-row gap-2">
-                                <div className="flex flex-1 flex-col justify-center w-4">
+                        {event.location?.placeName || event.location?.address ?
+                            <div className="flex flex-row gap-4">
+                                <div className="flex flex-col justify-center w-4">
                                     <MapPinIcon className="w-4 h-4" />
                                 </div>
-                                <p className="text-sm font-medium">{event.location.placeName}</p>
+                                <p className="text-sm font-medium">{event.location.placeName}
+                                    {event.location.address ?
+                                        <>
+                                            <br />
+                                            {event.location.address}
+                                        </> : null
+                                    }</p>
+                            </div> : null}
+                        {event.url ?
+                            <div className="flex flex-row gap-4">
+                                <div className="flex flex-col justify-center w-4">
+                                    <Link2Icon className="w-4 h-4" />
+                                </div>
+                                <a className="text-sm font-medium underline underline-offset-4 truncate" target="_blank" href={event.url}>{event.url}</a>
                             </div> : null}
                     </CardContent>
                 </Card>
@@ -73,7 +86,7 @@ export default function EventCard(props: { event: CalendarEvent }) {
                             <Label htmlFor="desc">
                                 Location
                             </Label>
-                            <Input id="desc" value={event.location?.placeName} className="col-span-3" />
+                            <Input id="desc" value={event.location ? event.location?.placeName + ", " + event.location?.address : ""} className="col-span-3" />
                         </div>
                     </div>
                     <DialogFooter>
