@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Sparkles, UploadIcon } from "lucide-react";
+import { FileTextIcon, Sparkles, UploadIcon } from "lucide-react";
 import {
     Card,
     CardContent,
@@ -62,19 +62,30 @@ export default function EditorPage() {
             <div className="flex flex-col flex-grow items-start gap-6">
                 <div className="flex flex-1 max-md:flex-col lg:flex-row mx-auto w-full min-w-0 gap-4 lg:gap-6">
                     <div className="flex flex-col flex-1 gap-4">
-                        <Card className="flex flex-col flex-1 w-full border-none">
+                        <Card className="flex flex-col flex-1 w-full">
                             {/* <CardHeader className="flex flex-row justify-between gap-4 pb-0 items-center">
                             <CardTitle className="text-md font-semibold leading-none tracking-tight">
                                 Paste or upload document
                             </CardTitle>
 
                         </CardHeader> */}
-                            <CardContent className="p-0 h-full flex flex-1 flex-col relative">
+                            <CardContent className="p-0 h-full flex flex-1 flex-col justify-center items-center relative">
                                 <Textarea placeholder="Paste text here or upload document."
-                                    className="h-full flex-1 p-4 xl:p-6 flex"
+                                    className={"h-full flex-1 p-4 xl:p-6 flex border-none " + (fileInputRef.current?.files?.length ? "hidden" : "")}
                                     value={docText}
                                     onChange={e => setDocText(e.target.value)}
                                 ></Textarea>
+                                {
+                                    fileInputRef.current?.files?.length ? (
+                                        <div className="flex flex-row gap-3 items-center">
+                                            <FileTextIcon className="h-10 w-10" />
+                                            <div className="flex flex-col space-y-1.5 ">
+                                                <CardTitle>Uploaded file</CardTitle>
+                                                <p className="text-sm text-muted-foreground">{fileInputRef.current?.files[0].name}</p>
+                                            </div>
+                                        </div>
+                                    ) : null
+                                }
                                 <input onChange={onFileInputChange} accept="application/pdf" type="file" className="hidden" name="Upload file" id="upload-input" ref={fileInputRef} />
                                 <label htmlFor="upload-input" className={"absolute right-4 top-4 transition-opacity " + (docText ? 'hidden' : 'block')}>
                                     <Button type="button" onClick={() => fileInputRef.current?.click()} variant="secondary" size="icon" aria-label="Upload file">
@@ -113,6 +124,6 @@ export default function EditorPage() {
                 </div>
 
             </div>
-        </div>
+        </div >
     )
 }
