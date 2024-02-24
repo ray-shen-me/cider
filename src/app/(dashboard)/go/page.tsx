@@ -20,6 +20,8 @@ import EventCard from "@/components/event-card";
 import pdf from '@cyber2024/pdf-parse-fixed';
 import * as ics from 'ics';
 import { addressEnricher } from "@/lib/enricher";
+const { writeFileSync } = require('fs')
+
 
 export default function EditorPage() {
     const [docText, setDocText] = useState("");
