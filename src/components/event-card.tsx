@@ -16,29 +16,64 @@ import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, Dialog
 import { EditIcon, Link2Icon, MapPinIcon } from "lucide-react";
 import { Label } from "./ui/label";
 
+const formatDay = (date: Date): string => {
+    return date.toLocaleDateString('default', { month: "short", day: "numeric", year: "numeric" });
+}
+
+const formatTime = (date: Date): string => {
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+}
+
+const formatStartEnd = (start: Date, end: Date): string => {
+    if (start.getDate() == end.getDate()) {
+        return formatDay(start) + '\n' + formatTime(start) + ' to ' + formatTime(end);
+    }
+    return `${formatDay(start)} ${formatTime(start)} - ${formatDay(end)} ${formatTime(end)}`
+}
+
 export default function EventCard(props: { event: CalendarEvent }) {
     let event = props.event;
+    let end = event.end ? new Date(event.end) : new Date(event.start);
+    if (!event.end && event.duration) {
+        let time = end.getTime();
+        time += (event.duration.weeks || 0) * 1000 * 60 * 60 * 24 * 7;
+        time += (event.duration.days || 0) * 1000 * 60 * 60 * 24;
+        time += (event.duration.hours || 0) * 1000 * 60 * 60;
+        time += (event.duration.minutes || 0) * 1000 * 60;
+        time += (event.duration.seconds || 0) * 1000;
+        end.setTime(time);
+    }
     return (
         <>
             <Dialog>
                 <Card className="flex-1">
-                    <CardHeader>
-                        <CardTitle>
-                            {event.title}
-                        </CardTitle>
+                    <CardHeader className="pb-4">
+                        <div className="flex flex-row justify-between">
+                            <CardTitle>
+                                {event.title}
+                            </CardTitle>
+                            <DialogTrigger asChild>
+                                <Button variant="ghost" size="icon" className="mt-[-10px] mr-[-10px]">
+                                    <EditIcon className="h-4 w-4" />
+                                </Button>
+                            </DialogTrigger>
+                        </div>
+
                         <CardDescription>
                             {event.description}
 
 
                         </CardDescription>
-                        <DialogTrigger asChild>
-                            <Button variant="ghost" size="icon">
-                                <EditIcon className="h-4 w-4" />
-                            </Button>
-                        </DialogTrigger>
+
                     </CardHeader>
 
-                    <CardContent>
+                    <CardContent className="flex flex-col gap-2">
+                        <div className="flex flex-row gap-4">
+                            {/* <div className="flex flex-col justify-center w-4">
+                                <Link2Icon className="w-4 h-4" />
+                            </div> */}
+                            <p className="text-sm font-medium">{formatStartEnd(new Date(event.start), end)}</p>
+                        </div>
                         {event.location?.placeName || event.location?.address ?
                             <div className="flex flex-row gap-4">
                                 <div className="flex flex-col justify-center w-4">
