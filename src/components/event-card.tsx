@@ -46,7 +46,7 @@ export default function EventCard(props: { event: CalendarEvent }) {
     return (
         <>
             <Dialog>
-                <Card className="flex-1">
+                <Card className="flex-1 md:w-64 lg:w-96">
                     <CardHeader className="pb-4">
                         <div className="flex flex-row justify-between">
                             <CardTitle>
