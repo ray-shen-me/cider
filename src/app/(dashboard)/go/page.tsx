@@ -11,9 +11,12 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+
 import SiteHeader from "@/components/site-header";
 import { useRef, useState } from "react";
 import { CalendarEvent } from "@/lib/types";
+import { Input } from "@/components/ui/input";
+import EventCard from "@/components/event-card";
 import pdf from '@cyber2024/pdf-parse-fixed';
 
 export default function EditorPage() {
@@ -110,15 +113,13 @@ export default function EditorPage() {
                                 </Button>
                             </div> */}
 
-                        <p className="text-sm m-auto">
-                            {events?.map((event) => {
-                                return <Card>
-                                    <CardHeader>{event.title}</CardHeader>
-                                    <CardContent></CardContent>
-                                    <CardFooter></CardFooter>
-                                </Card>
-                            })}
-                        </p>
+                        {events?.map((event) => { //Meeting with Ray Shen Tomorrow to work on Project at Oakton High School
+                            return <EventCard
+                                title={event.title}
+                                desc={event.description}
+                                location={event.location}
+                            />
+                        })}
                     </div>
 
                 </div>
