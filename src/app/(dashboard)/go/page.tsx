@@ -13,14 +13,14 @@ import {
 } from "@/components/ui/card"
 import SiteHeader from "@/components/site-header";
 import { useState } from "react";
-import { CalendarEvents } from "@/lib/types";
+import { CalendarEvent } from "@/lib/types";
 
 export default function EditorPage() {
     const [docText, setDocText] = useState("");
 
     // if the generate button hasn't been clicked yet, set to null
     // if there are 0 events returned, set to an empty array
-    let events: CalendarEvents | null = null
+    const [events, setEvents] = useState<CalendarEvent[] | null>(null);
 
     const generateEvents = async () => {
         const res = await fetch('/api/gen-events', {
@@ -30,9 +30,17 @@ export default function EditorPage() {
             },
             body: docText
         });
-        events = await res.json();
+        setEvents(await res.json());
         console.log(events)
     }
+
+    let eventCards = events?.map((event) => {
+        return <Card>
+            <CardHeader>{event.title}</CardHeader>
+            <CardContent></CardContent>
+            <CardFooter></CardFooter>
+        </Card>
+    })
 
     return (
         <div className="container flex-1 flex flex-col items-stretch gap-4 py-6">
@@ -78,7 +86,7 @@ export default function EditorPage() {
                                 </Button>
                             </div> */}
 
-                        <p className="text-sm m-auto">Events will appear here</p>
+                        <p className="text-sm m-auto">{eventCards}</p>
                     </div>
 
                 </div>
