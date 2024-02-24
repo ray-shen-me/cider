@@ -1,0 +1,14 @@
+This course is designed to prepare students for the AP Calculus AB exam. The course covers the following topics: limits and continuity, differentiation, applications of derivatives, integration, applications of integrals, and differential equations. The course follows a rigorous pace and requires students to complete regular homework assignments, quizzes, and tests. 
+
+All the following unit tests will be administed at Oakton High School (2900 Sutton Rd):
+
+- Unit 1: Limits and Continuity. Test on September 17, 2024 from 10:00 AM to 11:00 AM.
+- Unit 2: Differentiation: Definition and Fundamental Properties. Test on October 8, 2024 from 10:00 AM to 11:00 AM.
+- Unit 3: Differentiation: Composite, Implicit, and Inverse Functions. Test on October 29, 2024 from 10:00 AM to 11:00 AM.
+- Unit 4: Applications of Derivatives. Test on November 19, 2024 from 10:00 AM to 11:00 AM.
+- Unit 5: Integration: Definition and Fundamental Theorem of Calculus. Test on December 10, 2024 from 10:00 AM to 11:00 AM.
+- Unit 6: Integration: Techniques and Applications. Test on January 14, 2025 from 10:00 AM to 11:00 AM.
+- Unit 7: Differential Equations. Test on February 4, 2025 from 10:00 AM to 11:00 AM.
+- Unit 8: Review and Preparation for the AP Exam. Test on March 4, 2025 from 10:00 AM to 11:00 AM.
+
+Students are expected to attend all classes, participate actively, and adhere to the academic integrity policy. Students who need extra help or have any questions are encouraged to contact the instructor or visit the math tutoring center. The final grade for the course will be based on the following weights: homework 20%, quizzes 20%, tests 40%, and AP exam 20%.

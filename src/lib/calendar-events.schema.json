@@ -1,0 +1,126 @@
+{
+  "$ref": "#/definitions/CalendarEvents",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "CalendarEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "attendees": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "cutype": {
+                "enum": [
+                  "INDIVIDUAL",
+                  "GROUP"
+                ],
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "busyStatus": {
+          "description": "Determine appropriate status based on event.",
+          "enum": [
+            "FREE",
+            "BUSY",
+            "TENTATIVE"
+          ],
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "duration": {
+          "additionalProperties": false,
+          "description": "How long the event lasts. Either end or duration is required, but not both.",
+          "properties": {
+            "days": {
+              "type": "number"
+            },
+            "hours": {
+              "type": "number"
+            },
+            "minutes": {
+              "type": "number"
+            },
+            "seconds": {
+              "type": "number"
+            },
+            "weeks": {
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "end": {
+          "description": "Time at which event ends. Either end or duration is required, but not both.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "geo": {
+          "additionalProperties": false,
+          "description": "Do not include if not directly specified, will be enriched with API later.",
+          "properties": {
+            "lat": {
+              "type": "number"
+            },
+            "long": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "lat",
+            "long"
+          ],
+          "type": "object"
+        },
+        "start": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "startInputType": {
+          "description": "Whether the start time is in local or UTC time.",
+          "enum": [
+            "local",
+            "utc"
+          ],
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "transp": {
+          "description": "Specifies event transparency (does event consume actual time of an individual).  Used by Google Calendar to determine if event should change attendees availability to 'Busy' or not.",
+          "enum": [
+            "TRANSPARENT",
+            "OPAQUE"
+          ],
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "startInputType"
+      ],
+      "type": "object"
+    },
+    "CalendarEvents": {
+      "items": {
+        "$ref": "#/definitions/CalendarEvent"
+      },
+      "type": "array"
+    }
+  }
+}
