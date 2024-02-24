@@ -111,6 +111,7 @@
       "type": "string"
     },
     "url": {
+      "description": "Do not include if not directly specified.",
       "type": "string"
     }
   },
