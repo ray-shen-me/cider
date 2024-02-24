@@ -43,47 +43,43 @@ export default function EditorPage() {
         console.log(events)
     }
 
-    // function convertToICS(event: CalendarEvent){
-    //     if(event.location != null)
-    //         const enriched = await addressEnricher(event.location);
-    //     if(event.duration != null)
-    //     const details: ics.EventAttributes = {
-    //         start: event.start.toLocaleString(),
-    //         duration: event.duration,
-    //         title: event.title,
-    //         description: event.description,
-    //         location: enriched.address,
-            
-    
-
-
-
-    //     }
-
-    // }
+    async function convertToICS(event: CalendarEvent) {
+        // if (event.location != null && event.location.placeName && !event.location.placeName) {
+        //     event = await addressEnricher(event.location.placeName);
+        // }
+        // @ts-expect-error
+        const duration: ics.DurationObject = event.duration ? {
+            weeks: event.duration.weeks,
+            days: event.duration.days,
+            hours: event.duration.hours,
+            minutes: event.duration.minutes,
+            seconds: event.duration.seconds,
+        } : undefined;
+        const a = []
+        if (event.location?.placeName) a.push(event.location.placeName);
+        if (event.location?.address) a.push(event.location.address);
+        const details: ics.EventAttributes = {
+            start: event.start.toLocaleString(),
+            duration: duration,
+            title: event.title,
+            description: event.description,
+            location: a.join(', '),
+            url: event.url,
+            geo: event.geo ? {
+                lat: event.geo.lat,
+                lon: event.geo.long
+            } : undefined,
+            busyStatus: event.busyStatus,
+            transp: event.transp,
+            attendees: event.attendees
+        }
+        return ics.createEvent(details)
+    }
 
 
     const submitInfo = async () => {
-        /*
-        const event = {
-            start: [2018, 5, 30, 6, 30],
-            duration: { hours: 6, minutes: 30 },
-            title: 'Bolder Boulder',
-            description: 'Annual 10-kilometer run in Boulder, Colorado',
-            location: 'Folsom Field, University of Colorado (finish line)',
-            url: 'http://www.bolderboulder.com/',
-            geo: { lat: 40.0095, lon: 105.2669 },
-            categories: ['10k races', 'Memorial Day Weekend', 'Boulder CO'],
-            status: 'CONFIRMED',
-            busyStatus: 'BUSY',
-            organizer: { name: 'Admin', email: 'Race@BolderBOULDER.com' },
-            attendees: [
-              { name: 'Adam Gibbons', email: 'adam@example.com', rsvp: true, partstat: 'ACCEPTED', role: 'REQ-PARTICIPANT' },
-              { name: 'Brittany Seaton', email: 'brittany@example2.org', dir: 'https://linkedin.com/in/brittanyseaton', role: 'OPT-PARTICIPANT' }
-            ]
-          }
-          */
-
+        const ICSevents = events?.map(convertToICS);
+        console.log(ICSevents);
     }
 
     const onFileInputChange = async () => {
