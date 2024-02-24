@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "compile-schemas": "ts-json-schema-generator --path 'src/lib/types.ts' --type 'CalendarEvents' > src/lib/calendar-events.schema.json; cp src/lib/calendar-events.schema.json src/lib/calendar-events.schema.json.txt",
+    "compile-schemas": "ts-json-schema-generator --path 'src/lib/types.ts' --type 'CalendarEvent' > src/lib/calendar-event-generated.schema.json",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

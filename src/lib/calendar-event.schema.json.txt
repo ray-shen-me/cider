@@ -1,5 +1,4 @@
 {
-  "type": "object",
   "additionalProperties": false,
   "properties": {
     "attendees": {
@@ -14,6 +13,7 @@
             "type": "string"
           },
           "email": {
+            "description": "Do not include if not directly specified.",
             "type": "string"
           },
           "name": {
@@ -80,16 +80,12 @@
       ],
       "type": "object"
     },
-    "start": {
-      "format": "date-time",
+    "location": {
       "type": "string"
     },
-    "startInputType": {
-      "description": "Whether the start time is in local or UTC time.",
-      "enum": [
-        "local",
-        "utc"
-      ],
+    "start": {
+      "description": "Time at which event starts. If not specified, make event last the whole day.",
+      "format": "date-time",
       "type": "string"
     },
     "title": {
@@ -108,7 +104,7 @@
     }
   },
   "required": [
-    "start",
-    "startInputType"
-  ]
+    "start"
+  ],
+  "type": "object"
 }

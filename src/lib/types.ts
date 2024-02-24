@@ -1,5 +1,6 @@
 type Person = {
     name?: string;
+    /** Do not include if not directly specified. */
     email?: string;
 }
 
@@ -10,15 +11,15 @@ type Attendee = Person & {
 
 // JSON schema: 
 export type CalendarEvent = {
+    /** Time at which event starts. If a time is not specified, make event last the whole day. */
     start: Date,
-    /** Whether the start time is in local or UTC time. */
-    startInputType: "local" | "utc";
     /** How long the event lasts. Either end or duration is required, but not both. */
     duration?: { weeks?: number; days?: number; hours?: number; minutes?: number; seconds?: number };
     /** Time at which event ends. Either end or duration is required, but not both. */
     end?: Date;
     title?: string;
     description?: string;
+    location?: string;
     /** Do not include if not directly specified, will be enriched with API later. */
     geo?: { lat: number; long: number };
     url?: string;
@@ -32,5 +33,3 @@ export type CalendarEvent = {
     attendees?: Attendee[];
     // exclusionDates?: Date[];
 };
-
-export type CalendarEvents = CalendarEvent[];
