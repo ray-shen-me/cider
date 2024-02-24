@@ -17,14 +17,17 @@ export default function EventCard({ ...props  }) {
     let desc = props.desc;
     let location = props.location;
 
-    const handleChange = (event: { target: { value: any; }; }) => {
-        
-    }
-
     return (
-        <Card>
-            <CardHeader><Input type='text' defaultValue={title} onChange={handleChange}/></CardHeader>
-            <CardContent><Input type='text' defaultValue={desc}/></CardContent>
+        <Card className="flex-1">
+            <CardHeader>
+                <CardTitle>
+                    <Input type='text' defaultValue={title}/>
+                </CardTitle>
+                </CardHeader>
+                <CardDescription>
+                    <Input type='text' defaultValue={desc}/>
+                </CardDescription>
+            <CardContent></CardContent>
             <CardFooter><Input type='text' defaultValue={location}/></CardFooter>
         </Card>
     )
