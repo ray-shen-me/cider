@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Sparkles } from "lucide-react";
+import { FileTextIcon, Sparkles, UploadIcon } from "lucide-react";
 import {
     Card,
     CardContent,
@@ -13,10 +13,11 @@ import {
 } from "@/components/ui/card"
 
 import SiteHeader from "@/components/site-header";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { CalendarEvent } from "@/lib/types";
 import { Input } from "@/components/ui/input";
 import EventCard from "@/components/event-card";
+import pdf from '@cyber2024/pdf-parse-fixed';
 
 export default function EditorPage() {
     const [docText, setDocText] = useState("");
@@ -24,6 +25,9 @@ export default function EditorPage() {
     // if the generate button hasn't been clicked yet, set to null
     // if there are 0 events returned, set to an empty array
     const [events, setEvents] = useState<CalendarEvent[] | null>(null);
+
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
 
     const generateEvents = async () => {
         const res = await fetch('/api/gen-events', {
@@ -35,6 +39,16 @@ export default function EditorPage() {
         });
         setEvents(await res.json());
         console.log(events)
+    }
+
+    const onFileInputChange = async () => {
+        if (!fileInputRef.current) return;
+        if (!fileInputRef.current.files || fileInputRef.current.files.length == 0) return;
+
+        const file = fileInputRef.current.files[0];
+        const pdfData = await pdf(Buffer.from(await file.arrayBuffer()));
+        setDocText(pdfData.text);
+        generateEvents();
     }
 
     return (
@@ -51,19 +65,37 @@ export default function EditorPage() {
             <div className="flex flex-col flex-grow items-start gap-6">
                 <div className="flex flex-1 max-md:flex-col lg:flex-row mx-auto w-full min-w-0 gap-4 lg:gap-6">
                     <div className="flex flex-col flex-1 gap-4">
-                        <Card className="flex flex-col flex-1 w-full focus-within:ring-1 focus-within:ring-ring">
+                        <Card className="flex flex-col flex-1 w-full">
                             {/* <CardHeader className="flex flex-row justify-between gap-4 pb-0 items-center">
                             <CardTitle className="text-md font-semibold leading-none tracking-tight">
                                 Paste or upload document
                             </CardTitle>
 
                         </CardHeader> */}
-                            <CardContent className="p-0 h-full flex flex-1 flex-col">
-                                <textarea placeholder="Paste text here or upload document."
-                                    className="h-full flex-1 p-4 xl:p-6 flex min-h-[80px] w-full border-radius rounded-lg bg-transparent text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                            <CardContent className="p-0 h-full flex flex-1 flex-col justify-center items-center relative">
+                                <Textarea placeholder="Paste text here or upload document."
+                                    className={"h-full flex-1 p-4 xl:p-6 flex border-none " + (fileInputRef.current?.files?.length ? "hidden" : "")}
                                     value={docText}
                                     onChange={e => setDocText(e.target.value)}
-                                ></textarea>
+                                ></Textarea>
+                                {
+                                    fileInputRef.current?.files?.length ? (
+                                        <div className="flex flex-row gap-3 items-center">
+                                            <FileTextIcon className="h-10 w-10" />
+                                            <div className="flex flex-col space-y-1.5 ">
+                                                <CardTitle>Uploaded file</CardTitle>
+                                                <p className="text-sm text-muted-foreground">{fileInputRef.current?.files[0].name}</p>
+                                            </div>
+                                        </div>
+                                    ) : null
+                                }
+                                <input onChange={onFileInputChange} accept="application/pdf" type="file" className="hidden" name="Upload file" id="upload-input" ref={fileInputRef} />
+                                <label htmlFor="upload-input" className={"absolute right-4 top-4 transition-opacity " + (docText ? 'hidden' : 'block')}>
+                                    <Button type="button" onClick={() => fileInputRef.current?.click()} variant="secondary" size="icon" aria-label="Upload file">
+                                        <UploadIcon className="h-4 w-4" />
+                                    </Button>
+                                </label>
+
 
                             </CardContent>
 
@@ -81,20 +113,18 @@ export default function EditorPage() {
                                 </Button>
                             </div> */}
 
-                        <p className="text-sm m-auto">
-                            {events?.map((event) => { //Meeting with Ray Shen Tomorrow to work on Project at Oakton High School
-                                return <EventCard
-                                    title={event.title}
-                                    desc={event.description}
-                                    location={event.location}
-                                />
-                            })}
-                        </p>
+                        {events?.map((event) => { //Meeting with Ray Shen Tomorrow to work on Project at Oakton High School
+                            return <EventCard
+                                title={event.title}
+                                desc={event.description}
+                                location={event.location}
+                            />
+                        })}
                     </div>
 
                 </div>
 
             </div>
-        </div>
+        </div >
     )
 }
