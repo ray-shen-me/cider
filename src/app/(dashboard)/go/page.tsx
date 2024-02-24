@@ -11,9 +11,12 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+
 import SiteHeader from "@/components/site-header";
 import { useState } from "react";
 import { CalendarEvent } from "@/lib/types";
+import { Input } from "@/components/ui/input";
+import EventCard from "@/components/event-card";
 
 export default function EditorPage() {
     const [docText, setDocText] = useState("");
@@ -79,12 +82,12 @@ export default function EditorPage() {
                             </div> */}
 
                         <p className="text-sm m-auto">
-                            {events?.map((event) => {
-                                return <Card>
-                                    <CardHeader>{event.title}</CardHeader>
-                                    <CardContent></CardContent>
-                                    <CardFooter></CardFooter>
-                                </Card>
+                            {events?.map((event) => { //Meeting with Ray Shen Tomorrow to work on Project at Oakton High School
+                                return <EventCard
+                                    title={event.title}
+                                    desc={event.description}
+                                    location={event.location}
+                                />
                             })}
                         </p>
                     </div>
