@@ -104,7 +104,7 @@ export default function EditorPage() {
 
 
                     </div>
-                    <div className="flex flex-col gap-4 md:min-w-64 lg:min-w-96">
+                    <div className="flex flex-col gap-4 md:w-64 lg:w-96">
                         {/* <div className="flex flex-row justify-between items-center">
                                 <h2 className="text-md font-semibold leading-none tracking-tight flex-1">Events</h2>
                                 <Button className="text-sm">
@@ -113,11 +113,10 @@ export default function EditorPage() {
                                 </Button>
                             </div> */}
 
-                        {events?.map((event) => { //Meeting with Ray Shen Tomorrow to work on Project at Oakton High School
+                        {events?.map((event, index) => { //Meeting with Ray Shen Tomorrow to work on Project at Oakton High School
                             return <EventCard
-                                title={event.title}
-                                desc={event.description}
-                                location={event.location}
+                                event={event}
+                                key={index}
                             />
                         })}
                     </div>
