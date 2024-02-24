@@ -44,11 +44,9 @@ export default function EventCard(props: { event: CalendarEvent }) {
                                 <div className="flex flex-1 flex-col justify-center w-4">
                                     <MapPinIcon className="w-4 h-4" />
                                 </div>
-                                <p className="text-sm font-medium">{event.location}</p>
+                                <p className="text-sm font-medium">{event.location.placeName}</p>
                             </div> : null}
-
                     </CardContent>
-                    <CardFooter><Input type='text' defaultValue={event.location} /></CardFooter>
                 </Card>
 
                 <DialogContent className="sm:max-w-[425px]">
@@ -75,7 +73,7 @@ export default function EventCard(props: { event: CalendarEvent }) {
                             <Label htmlFor="desc">
                                 Location
                             </Label>
-                            <Input id="desc" value={event.location} className="col-span-3" />
+                            <Input id="desc" value={event.location?.placeName} className="col-span-3" />
                         </div>
                     </div>
                     <DialogFooter>

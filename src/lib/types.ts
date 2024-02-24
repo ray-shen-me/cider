@@ -19,7 +19,12 @@ export type CalendarEvent = {
     end?: Date;
     title?: string;
     description?: string;
-    location?: string;
+    location?: {
+        /** Do not include address in placeName. */
+        placeName?: string;
+        /** Do not include if not directly specified, will be enriched with API later. */
+        address?: string;
+    }
     /** Do not include if not directly specified, will be enriched with API later. */
     geo?: { lat: number; long: number };
     url?: string;
