@@ -34,14 +34,6 @@ export default function EditorPage() {
         console.log(events)
     }
 
-    let eventCards = events?.map((event) => {
-        return <Card>
-            <CardHeader>{event.title}</CardHeader>
-            <CardContent></CardContent>
-            <CardFooter></CardFooter>
-        </Card>
-    })
-
     return (
         <div className="container flex-1 flex flex-col items-stretch gap-4 py-6">
             <div className="flex flex-row justify-between items-center">
@@ -86,7 +78,15 @@ export default function EditorPage() {
                                 </Button>
                             </div> */}
 
-                        <p className="text-sm m-auto">{eventCards}</p>
+                        <p className="text-sm m-auto">
+                            {events?.map((event) => {
+                                return <Card>
+                                    <CardHeader>{event.title}</CardHeader>
+                                    <CardContent></CardContent>
+                                    <CardFooter></CardFooter>
+                                </Card>
+                            })}
+                        </p>
                     </div>
 
                 </div>
