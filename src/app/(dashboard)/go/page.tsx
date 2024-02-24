@@ -122,7 +122,7 @@ export default function EditorPage() {
                         </CardHeader> */}
                             <CardContent className="p-0 h-full flex flex-1 flex-col justify-center items-center relative">
                                 <Textarea placeholder="Paste text here or upload document."
-                                    className={"h-full flex-1 p-4 xl:p-6 flex border-none " + (fileInputRef.current?.files?.length ? "hidden" : "")}
+                                    className={"rounded-xl h-full flex-1 p-4 xl:p-6 flex border-none " + (fileInputRef.current?.files?.length ? "hidden" : "")}
                                     value={docText}
                                     onChange={e => setDocText(e.target.value)}
                                 ></Textarea>
@@ -152,7 +152,7 @@ export default function EditorPage() {
 
 
                     </div>
-                    <div className="flex flex-col gap-4 md:min-w-64 lg:min-w-96">
+                    <div className="flex flex-col gap-4 md:w-64 lg:w-96">
                         {/* <div className="flex flex-row justify-between items-center">
                                 <h2 className="text-md font-semibold leading-none tracking-tight flex-1">Events</h2>
                                 <Button className="text-sm">
@@ -161,11 +161,10 @@ export default function EditorPage() {
                                 </Button>
                             </div> */}
 
-                        {events?.map((event) => { //Meeting with Ray Shen Tomorrow to work on Project at Oakton High School
+                        {events?.map((event, index) => { //Meeting with Ray Shen Tomorrow to work on Project at Oakton High School
                             return <EventCard
-                                title={event.title}
-                                desc={event.description}
-                                location={event.location}
+                                event={event}
+                                key={index}
                             />
                         })}
                     </div>

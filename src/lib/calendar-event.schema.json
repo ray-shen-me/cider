@@ -81,10 +81,21 @@
       "type": "object"
     },
     "location": {
-      "type": "string"
+      "additionalProperties": false,
+      "properties": {
+        "address": {
+          "description": "Do not include if not directly specified, will be enriched with API later.",
+          "type": "string"
+        },
+        "placeName": {
+          "description": "Do not include address in placeName.",
+          "type": "string"
+        }
+      },
+      "type": "object"
     },
     "start": {
-      "description": "Time at which event starts. If not specified, make event last the whole day.",
+      "description": "Time at which event starts. If a time is not specified, make event last the whole day.",
       "format": "date-time",
       "type": "string"
     },
