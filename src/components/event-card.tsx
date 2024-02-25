@@ -15,8 +15,9 @@ import { CalendarEvent } from "@/lib/types";
 import { Input } from "@/components/ui/input";
 import { Button } from "./ui/button";
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "./ui/dialog";
-import { EditIcon, Link2Icon, MapPinIcon } from "lucide-react";
+import { EditIcon, Link2Icon, MapPinIcon, UsersIcon } from "lucide-react";
 import { Label } from "./ui/label";
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "./ui/hover-card";
 
 const formatDay = (date: Date): string => {
     return date.toLocaleDateString('default', { month: "short", day: "numeric", year: "numeric" });
@@ -52,7 +53,7 @@ export default function EventCard(props: { event: CalendarEvent }) {
     return (
         <>
             <Dialog>
-                <Card className="flex-1 md:w-64 lg:w-96">
+                <Card className="md:w-64 lg:w-96 max-w-full self-stretch">
                     <CardHeader className="pb-4">
                         <div className="flex flex-row justify-between">
                             <CardTitle>
@@ -99,6 +100,20 @@ export default function EventCard(props: { event: CalendarEvent }) {
                                     <Link2Icon className="w-4 h-4" />
                                 </div>
                                 <a className="text-sm font-medium underline underline-offset-4 truncate" target="_blank" href={event.url}>{event.url}</a>
+                            </div> : null}
+                        {event.attendees?.length ?
+                            <div className="flex flex-row items-center gap-4">
+                                <UsersIcon className="w-4 h-4"></UsersIcon>
+                                {event.attendees.map(attendee => {
+                                    return <HoverCard>
+                                        <HoverCardTrigger asChild>
+                                            <Button variant="link" className="p-0 h-[unset]">{attendee.name}</Button>
+                                        </HoverCardTrigger>
+                                        <HoverCardContent>
+                                            {attendee.name} - {attendee.email || 'Email unknown'}
+                                        </HoverCardContent>
+                                    </HoverCard>
+                                })}
                             </div> : null}
                     </CardContent>
                 </Card>

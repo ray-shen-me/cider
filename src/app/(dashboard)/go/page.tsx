@@ -174,10 +174,10 @@ export default function EditorPage() {
     }
 
     function sampleText(sample: number) {
-        if(sample == 1){
+        if (sample == 1) {
             setDocText(doc1);
         }
-        if(sample == 2){
+        if (sample == 2) {
             setDocText(doc2);
         }
 
@@ -234,7 +234,7 @@ export default function EditorPage() {
 
 
                     </div>
-                    <div className="flex flex-col gap-4 md:w-64 lg:w-96 items-end">
+                    <div className="flex flex-col gap-4 md:w-64 lg:w-96 md:max-w-64 lg:max-w-96 items-end">
                         <div className={"md:hidden " + (!events?.length ? "hidden" : "")}>
                             <Button className="text-sm" onClick={submitInfo}>
                                 Export
@@ -249,7 +249,7 @@ export default function EditorPage() {
                             />
                         })}
                         {loading ?
-                            <Card className="md:w-64 lg:w-96">
+                            <Card className="max-w-full md:w-64 lg:w-96 self-stretch">
                                 <CardContent className="flex flex-col space-y-2 p-6">
                                     <Skeleton className="h-4 w-[100%]" />
                                     <Skeleton className="h-4 w-[100%]" />
