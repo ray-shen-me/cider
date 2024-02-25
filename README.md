@@ -12,6 +12,7 @@ Use [git](https://git-scm.com/downloads) to install Cider.
 
 ```bash
 git clone https://github.com/ray-shen-me/cider.git
+```
 
 ## 💻 Run Cider locally
 
