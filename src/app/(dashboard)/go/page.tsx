@@ -20,6 +20,7 @@ import EventCard from "@/components/event-card";
 import pdf from '@cyber2024/pdf-parse-fixed';
 import * as ics from 'ics';
 import { addressEnricher } from "@/lib/enricher";
+import { convertEventsToICS } from "@/lib/ics";
 
 export default function EditorPage() {
     const [docText, setDocText] = useState("");
@@ -29,7 +30,6 @@ export default function EditorPage() {
     const [events, setEvents] = useState<CalendarEvent[] | null>(null);
 
     const fileInputRef = useRef<HTMLInputElement>(null);
-
 
     const generateEvents = async () => {
         const res = await fetch('/api/gen-events', {
@@ -43,43 +43,21 @@ export default function EditorPage() {
         console.log(events)
     }
 
-    async function convertToICS(event: CalendarEvent) {
-        // if (event.location != null && event.location.placeName && !event.location.placeName) {
-        //     event = await addressEnricher(event.location.placeName);
-        // }
-        // @ts-expect-error
-        const duration: ics.DurationObject = event.duration ? {
-            weeks: event.duration.weeks,
-            days: event.duration.days,
-            hours: event.duration.hours,
-            minutes: event.duration.minutes,
-            seconds: event.duration.seconds,
-        } : undefined;
-        const a = []
-        if (event.location?.placeName) a.push(event.location.placeName);
-        if (event.location?.address) a.push(event.location.address);
-        const details: ics.EventAttributes = {
-            start: event.start.toLocaleString(),
-            duration: duration,
-            title: event.title,
-            description: event.description,
-            location: a.join(', '),
-            url: event.url,
-            geo: event.geo ? {
-                lat: event.geo.lat,
-                lon: event.geo.long
-            } : undefined,
-            busyStatus: event.busyStatus,
-            transp: event.transp,
-            attendees: event.attendees
-        }
-        return ics.createEvent(details)
-    }
-
-
     const submitInfo = async () => {
-        const ICSevents = events?.map(convertToICS);
-        console.log(ICSevents);
+        if (!events) return;
+        const icsText = convertEventsToICS(events);
+        const blob = new Blob([icsText], {
+            type: "text/calendar"
+        });
+        const url = window.URL.createObjectURL(blob);;
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        // the filename you want
+        a.download = 'events.ics';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
     }
 
     const onFileInputChange = async () => {
