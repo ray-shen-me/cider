@@ -36,7 +36,7 @@ const formatStartEnd = (start: Date, end: Date): string => {
 
 const dateArrayToDate = (dateArray: number[]): Date => {
     // return new Date(dateArray[0], dateArray[1], dateArray[2], dateArray[3], dateArray[4])
-    return new Date(`${dateArray[0]}-${dasteArray[1].toString().padStart(2, '0')}-${dateArray[2].toString().padStart(2, '0')}T${(dateArray[3] || 0).toString().padStart(2, '0')}:${(dateArray[4] || 0).toString().padStart(2, '0')}:00`);
+    return new Date(`${dateArray[0]}-${dateArray[1].toString().padStart(2, '0')}-${dateArray[2].toString().padStart(2, '0')}T${(dateArray[3] || 0).toString().padStart(2, '0')}:${(dateArray[4] || 0).toString().padStart(2, '0')}:00`);
 }
 
 export default function EventCard(props: { event: CalendarEvent }) {
