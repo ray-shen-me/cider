@@ -82,6 +82,7 @@ export default function EditorPage() {
     const submitInfo = async () => {
         const ICSevents = events?.map(convertToICS);
         console.log(ICSevents);
+        
     }
 
     const onFileInputChange = async () => {
@@ -100,18 +101,10 @@ export default function EditorPage() {
                 <div>
                     <h2 className="text-lg font-semibold hidden xs:block">Create Events from Doc</h2>
                 </div>
-                <div className="flex flex-row gap-4">
-                    <Button className="text-sm" onClick={generateEvents} variant={!events?.length ? "default" : "secondary"}>
-                        <Sparkles className="mr-2 h-4 w-4" />
-                        Generate <span className="xs:hidden">&nbsp;Events</span>
-                    </Button>
-                    <div className={"hidden " + (!events?.length ? "" : "md:block")}>
-                        <Button className="text-sm" onClick={submitInfo}>
-                            Export
-                        </Button>
-                    </div>
-                </div>
-
+                <Button className="text-sm" onClick={generateEvents}>
+                    <Sparkles className="mr-2 h-4 w-4" />
+                    Generate <span className="xs:hidden">&nbsp;Events</span>
+                </Button>
 
             </div>
             <div className="flex flex-col flex-grow items-start gap-6">
