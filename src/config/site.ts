@@ -1,9 +1,9 @@
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-    name: "Next.js",
+    name: "Cider",
     description:
-        "Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.",
+        "AI powered document analyzer that automatically creates .ics files.",
     mainNav: [
         {
             title: "Home",
@@ -11,8 +11,6 @@ export const siteConfig = {
         },
     ],
     links: {
-        twitter: "https://twitter.com/shadcn",
         github: "https://github.com/ray-shen-me/cider",
-        docs: "https://ui.shadcn.com",
     },
 }
