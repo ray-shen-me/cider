@@ -31,7 +31,6 @@ export async function POST(request: Request) {
             model: 'gpt-3.5-turbo-1106',
             response_format: { type: 'json_object' },
             stream: true,
-            temperature: 0.2
         });
 
         const stream = OpenAIStream(completion);
