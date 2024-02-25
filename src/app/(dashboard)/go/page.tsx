@@ -44,9 +44,6 @@ export default function EditorPage() {
     }
 
     const submitInfo = async () => {
-        const ICSevents = events?.map(convertToICS);
-        console.log(ICSevents);
-        
         if (!events) return;
         const icsText = convertEventsToICS(events);
         const blob = new Blob([icsText], {
