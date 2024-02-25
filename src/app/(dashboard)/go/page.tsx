@@ -13,14 +13,38 @@ import {
 } from "@/components/ui/card"
 
 import SiteHeader from "@/components/site-header";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CalendarEvent } from "@/lib/types";
 import { Input } from "@/components/ui/input";
 import EventCard from "@/components/event-card";
 import pdf from '@cyber2024/pdf-parse-fixed';
 import * as ics from 'ics';
-import { addressEnricher } from "@/lib/enricher";
+import { LocationEnrichmentData, addressEnricher } from "@/lib/enricher";
 import { convertEventsToICS } from "@/lib/ics";
+import { OpenAIStream, AIStream, StreamingTextResponse } from 'ai'
+import { Skeleton } from "@/components/ui/skeleton";
+
+
+const enrichEvent = async (event: CalendarEvent): Promise<CalendarEvent> => {
+    if (event.location?.placeName == null && event.location?.address == null) return event;
+    const a = []
+    if (event.location?.placeName) a.push(event.location.placeName);
+    if (event.location?.address) a.push(event.location.address);
+    const query = a.join(', ');
+
+    const res = await fetch('/api/location-enrichment?'
+        + new URLSearchParams({ name: query }));
+    const data: LocationEnrichmentData = await res.json();
+    if (data.coordinates) {
+        event.geo = {
+            lat: data.coordinates.lat,
+            long: data.coordinates.lng
+        }
+    }
+    if (data.address)
+        event.location.address = data.address;
+    return event;
+}
 
 export default function EditorPage() {
     const [docText, setDocText] = useState("");
@@ -29,19 +53,96 @@ export default function EditorPage() {
     // if there are 0 events returned, set to an empty array
     const [events, setEvents] = useState<CalendarEvent[] | null>(null);
 
+    const [loading, setLoading] = useState(false);
+
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-    const generateEvents = async () => {
-        const res = await fetch('/api/gen-events', {
+    useEffect(() => {
+        console.log(events);
+    }, [events])
+
+    // const generateEvents = async () => {
+    //     const res = await fetch('/api/gen-events', {
+    //         method: "POST",
+    //         headers: {
+    //             'Content-Type': 'text/plain'
+    //         },
+    //         body: docText
+    //     });
+    //     const unenriched: CalendarEvent[] = await res.json();
+    //     const enrichedEvents = await Promise.all(unenriched.map(enrichEvent));
+    //     setEvents(enrichedEvents);
+    // }
+
+
+    const generateEventsStreaming = async () => {
+        setLoading(true);
+        const res = await fetch('/api/gen-events/streaming', {
             method: "POST",
             headers: {
                 'Content-Type': 'text/plain'
             },
             body: docText
         });
-        setEvents(await res.json());
-        console.log(events)
+        setEvents([]);
+        const enriched: CalendarEvent[] = [];
+        let currentEventJson = "";
+        let parenStack: string[] = [];
+
+        const handleChar = (char: string) => {
+            if (parenStack.length >= 2) {
+                if (char == "," && currentEventJson == "")
+                    return;
+                currentEventJson += char;
+            }
+
+            if (currentEventJson[currentEventJson.length - 1] != "\\") {
+                if (char == "\"") {
+                    if (parenStack[parenStack.length - 2] == "\"") {
+                        parenStack.pop();
+                    }
+                }
+                if ("[{".includes(char) && parenStack[parenStack.length - 2] != "\"") {
+                    parenStack.push(char);
+                }
+                if ("}]".includes(char) && parenStack[parenStack.length - 2] != "\"") {
+                    parenStack.pop();
+                    if (parenStack.length == 2 && parenStack[0] == "{" && parenStack[1] == "[") {
+                        enrichEvent(JSON.parse(currentEventJson)).then(e => {
+                            setEvents(oldEvents => oldEvents ? [...oldEvents, e] : [e]);
+                        })
+                        currentEventJson = "";
+                    }
+                }
+            }
+        }
+        const reader = res.body?.getReader();
+        if (!reader) return;
+        while (true) {
+            const { value, done } = await reader.read();
+            if (done) {
+                setLoading(false);
+                break;
+            }
+            const chunk = new TextDecoder().decode(value);
+            for (let i = 0; i < chunk.length; i++) {
+                const char = chunk[i];
+                handleChar(char);
+            }
+        }
+
+        // const stream = OpenAIStream(res, {
+        //     onToken: async token => {
+        //         console.log(token)
+        //         for (const char of token) {
+        //             handleChar(char)
+        //         }
+        //     }
+        // });
+        // stream.tee();
     }
+
+    const generateEvents = generateEventsStreaming;
 
     const submitInfo = async () => {
         if (!events) return;
@@ -141,6 +242,15 @@ export default function EditorPage() {
                                 key={index}
                             />
                         })}
+                        {loading ?
+                            <Card className="md:w-64 lg:w-96">
+                                <CardContent className="flex flex-col space-y-2 p-6">
+                                    <Skeleton className="h-4 w-[100%]" />
+                                    <Skeleton className="h-4 w-[100%]" />
+                                    <Skeleton className="h-4 w-[70%]" />
+                                </CardContent>
+
+                            </Card> : null}
                     </div>
 
                 </div>

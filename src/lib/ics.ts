@@ -32,7 +32,7 @@ export const convertToICSFormat = (event: CalendarEvent): ics.EventAttributes =>
         end: event.end ? event.end as [number, number, number, number, number] : undefined,
         title: event.title || undefined,
         description: event.description || undefined,
-        location: a.join(', ') || undefined,
+        location: a.join('\n') || undefined,
         url: event.url || undefined,
         geo: event.geo && event.geo.lat != null && event.geo.long != null ? {
             lat: event.geo.lat,
@@ -51,5 +51,6 @@ export const convertEventsToICS = (events: CalendarEvent[]): string => {
         console.log(error);
         throw new Error('Could not convert to ICS');
     }
-    return value || '';
+    if (!value) return '';
+    return value;
 }

@@ -49,9 +49,6 @@ export default function EventCard(props: { event: CalendarEvent }) {
         time += (event.duration.seconds || 0) * 1000;
         end.setTime(time);
     }
-    console.log(new Date().getTimezoneOffset());
-    console.log(end)
-    console.log(event)
     return (
         <>
             <Dialog>
