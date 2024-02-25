@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# [🍎  Cider](https://ciderai.tech)
 
-## Getting Started
+Quickly create calendar events with Cider! Cider is an AI powered document analyzer that automatically creates .ics files with titles, dates, descriptions, etc. 
 
-First, run the development server:
+## [🌍 Live demo](https://ciderai.tech)
+
+Create calendar events on a live demo of Cider at https://www.ciderai.tech/
+
+## 📦 Install Cider locally
+
+Use [git](https://git-scm.com/downloads) to install Cider.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/ray-shen-me/cider
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 💻 Run Cider locally
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+git clone https://github.com/ray-shen-me/cider
+npm install
+npm run dev
+```
+## 🤔 How it works
+Cider utilizes OpenAI's Chat-GPT 3.5 model API to analyze given text or documents in order to extract calendar event parameters.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The Google Maps Places API is then used in order to enrich the location found. For example, an input of Cvent HQ would output the formmated address, 1765 Greensboro Station Pl 7th Floor, McLean, VA 22102, so the calendar infomation can be more precise. 
 
-## Learn More
+All the information is then compiled and outputed to an .ics file using the [ics](https://www.npmjs.com/package/ics) library created by Adam Gibbons.
 
-To learn more about Next.js, take a look at the following resources:
+## 💞 Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Please make sure to update tests as appropriate.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Screenshots
 
-## Deploy on Vercel
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+
+
+## Authors
+
+- [@kendotzhou](https://www.github.com/notken12)
+- [@rayyshen](https://www.github.com/rayyshen)
+
+
+## 🔑 License
+[MIT](https://choosealicense.com/licenses/mit/)
