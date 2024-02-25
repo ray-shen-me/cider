@@ -104,8 +104,8 @@ export default function EventCard(props: { event: CalendarEvent }) {
                         {event.attendees?.length ?
                             <div className="flex flex-row items-center gap-4 mt-1">
                                 <UsersIcon className="w-4 h-4"></UsersIcon>
-                                {event.attendees.map(attendee => {
-                                    return <HoverCard>
+                                {event.attendees.map((attendee, index) => {
+                                    return <HoverCard key={index}>
                                         <HoverCardTrigger asChild>
                                             <Button variant="link" className="p-0 h-[unset]">{attendee.name}</Button>
                                         </HoverCardTrigger>
