@@ -59,9 +59,11 @@
       "type": "object"
     },
     "end": {
-      "description": "Time at which event ends. Either end or duration is required, but not both.",
-      "format": "date-time",
-      "type": "string"
+      "description": "Time at which event ends. Format: year, month, day, hour, minute. Either end or duration is required, but not both.",
+      "items": {
+        "type": "number"
+      },
+      "type": "array"
     },
     "geo": {
       "additionalProperties": false,
@@ -95,9 +97,11 @@
       "type": "object"
     },
     "start": {
-      "description": "Time at which event starts. If a time is not specified, make event last the whole day.",
-      "format": "date-time",
-      "type": "string"
+      "description": "Time at which event starts. Format: year, month, day, hour, minute. If a time is not specified, make event last the whole day.",
+      "items": {
+        "type": "number"
+      },
+      "type": "array"
     },
     "title": {
       "type": "string"

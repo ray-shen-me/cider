@@ -11,12 +11,12 @@ type Attendee = Person & {
 
 // JSON schema: 
 export type CalendarEvent = {
-    /** Time at which event starts. If a time is not specified, make event last the whole day. */
-    start: Date,
+    /** Time at which event starts. Format: year, month, day, hour, minute. If a time is not specified, make event last the whole day. */
+    start: number[],
     /** How long the event lasts. Either end or duration is required, but not both. */
     duration?: { weeks?: number; days?: number; hours?: number; minutes?: number; seconds?: number };
-    /** Time at which event ends. Either end or duration is required, but not both. */
-    end?: Date;
+    /** Time at which event ends. Format: year, month, day, hour, minute. Either end or duration is required, but not both. */
+    end?: number[];
     title?: string;
     description?: string;
     location?: {

@@ -1,3 +1,5 @@
+"use client";
+
 import {
     Card,
     CardContent,
@@ -31,9 +33,13 @@ const formatStartEnd = (start: Date, end: Date): string => {
     return `${formatDay(start)} ${formatTime(start)} - ${formatDay(end)} ${formatTime(end)}`
 }
 
+const dateArrayToDate = (dateArray: number[]): Date => {
+    return new Date(`${dateArray[1]}-${dateArray[2]}-${dateArray[0]} ${dateArray[3] || 0}:${dateArray[4] || 0}`);
+}
+
 export default function EventCard(props: { event: CalendarEvent }) {
     let event = props.event;
-    let end = event.end ? new Date(event.end) : new Date(event.start);
+    let end = event.end ? dateArrayToDate(event.end) : dateArrayToDate(event.start);
     if (!event.end && event.duration) {
         let time = end.getTime();
         time += (event.duration.weeks || 0) * 1000 * 60 * 60 * 24 * 7;
@@ -43,6 +49,9 @@ export default function EventCard(props: { event: CalendarEvent }) {
         time += (event.duration.seconds || 0) * 1000;
         end.setTime(time);
     }
+    console.log(new Date().getTimezoneOffset());
+    console.log(end)
+    console.log(event)
     return (
         <>
             <Dialog>
@@ -72,7 +81,7 @@ export default function EventCard(props: { event: CalendarEvent }) {
                             {/* <div className="flex flex-col justify-center w-4">
                                 <Link2Icon className="w-4 h-4" />
                             </div> */}
-                            <p className="text-sm font-medium">{formatStartEnd(new Date(event.start), end)}</p>
+                            <p className="text-sm font-medium">{formatStartEnd(dateArrayToDate(event.start), end)}</p>
                         </div>
                         {event.location?.placeName || event.location?.address ?
                             <div className="flex flex-row gap-4">
