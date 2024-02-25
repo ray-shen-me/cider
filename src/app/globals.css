@@ -127,80 +127,94 @@
 
 .anim1 {
   animation: fade-1 4.6s infinite;
+  transition: opacity 0.3s;
 }
 
 .anim2 {
   animation: fade-2 4.6s infinite;
+  transition: opacity 0.3s;
 
 }
 
 .anim3 {
   animation: fade-3 4.6s infinite;
+  transition: opacity 0.3s;
 }
 
 .anim4 {
   animation: fade-4 4.6s infinite;
+  transition: opacity 0.3s;
 }
 
 @keyframes fade-1 {
-  0%, 43.5% {
+
+  0%,
+  43.5% {
     opacity: 1;
   }
-  46.5%, 50% {
+
+  50%,
+  93.5% {
     opacity: 0;
   }
-  50%, 93.5% {
-    opacity: 0;
-  }
-  96.5%, 100% {
+
+  100% {
     opacity: 1;
   }
 }
 
 @keyframes fade-2 {
-  0%, 15.2% {
+
+  0%,
+  15.2% {
     opacity: 0;
   }
-  18.5%, 22% {
+
+  22% {
     opacity: 1;
   }
-  22%, 43.5% {
+
+  22%,
+  43.5% {
     opacity: 1;
   }
-  46.5%, 50% {
-    opacity: 0;
-  }
-  50%, 100% {
+
+  50%,
+  100% {
     opacity: 0;
   }
 }
 
 @keyframes fade-3 {
-  0%, 43.5% {
+
+  0%,
+  43.5% {
     opacity: 0;
   }
-  46.5%, 50% {
+
+  50%,
+  93.5% {
     opacity: 1;
   }
-  50%, 93.5% {
-    opacity: 1;
-  }
-  96.5%, 100% {
+
+  100% {
     opacity: 0;
   }
 }
 
 @keyframes fade-4 {
-  0%, 65.2% {
+
+  0%,
+  65.2% {
     opacity: 0;
   }
-  68.5%, 72% {
+
+  72%,
+  93.5% {
     opacity: 1;
   }
-  72%, 93.5% {
-    opacity: 1;
-  }
-  96.5%, 100% {
+
+  100% {
     opacity: 0;
   }
 }
