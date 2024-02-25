@@ -19,7 +19,7 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-  } from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu"
 
 import doc1 from '/samples/doc1.txt';
 import doc2 from '/samples/doc2.txt';
@@ -191,7 +191,7 @@ export default function EditorPage() {
                 </div>
                 <div className="flex flex-row gap-4">
                     <DropdownMenu>
-                        <DropdownMenuTrigger className="mr-7 !outline-none" asChild>
+                        <DropdownMenuTrigger className="!outline-none" asChild>
                             <Button variant="outline" className="!outline-none">
                                 Samples
                             </Button>
@@ -251,6 +251,9 @@ export default function EditorPage() {
                             <Button className="text-sm" onClick={submitInfo}>
                                 Export
                             </Button>
+                        </div>
+                        <div className={"text-sm text-muted-foreground flex-1 self-stretch justify-center items-center " + (!events?.length && !loading ? "flex" : "hidden")}>
+                            {events === null ? "Events will appear here." : "No events found in document."}
                         </div>
 
 

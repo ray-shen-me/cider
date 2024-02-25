@@ -102,7 +102,7 @@ export default function EventCard(props: { event: CalendarEvent }) {
                                 <a className="text-sm font-medium underline underline-offset-4 truncate" target="_blank" href={event.url}>{event.url}</a>
                             </div> : null}
                         {event.attendees?.length ?
-                            <div className="flex flex-row items-center gap-4">
+                            <div className="flex flex-row items-center gap-4 mt-1">
                                 <UsersIcon className="w-4 h-4"></UsersIcon>
                                 {event.attendees.map(attendee => {
                                     return <HoverCard>
