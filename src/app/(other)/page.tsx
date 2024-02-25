@@ -13,8 +13,7 @@ export default function Home() {
             Events from Documents
           </h1>
           <p className="max-w-[700px] text-lg text-muted-foreground">
-            Accessible and customizable components that you can copy and paste
-            into your apps. Free. Open Source. And Next.js 13 Ready.
+          Quickly create calendar events with Cider! Cider is an AI powered document analyzer that automatically creates .ics files with titles, dates, descriptions, etc.
           </p>
           <div className="flex gap-4 mt-4">
             <Link

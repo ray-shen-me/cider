@@ -10,7 +10,7 @@ export default function SiteHeader({ children }: PropsWithChildren) {
             <div className="container flex h-14 items-center">
                 <div className="mr-4 hidden md:flex">
                     <a href="/" className="mr-6 flex items-center space-x-2">
-                        <span className="hidden font-bold sm:inline-block">Calendar AI</span>
+                        <span className="hidden font-bold sm:inline-block">Cider</span>
                     </a>
                     <nav className="flex items-center gap-6 text-sm"></nav>
                 </div>
