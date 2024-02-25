@@ -191,7 +191,7 @@ export default function EditorPage() {
                 </div>
                 <div className="flex flex-row gap-4">
                     <DropdownMenu>
-                        <DropdownMenuTrigger className="!outline-none" asChild>
+                        <DropdownMenuTrigger className={"!outline-none " + (docText ? "hidden" : "")} asChild>
                             <Button variant="outline" className="!outline-none">
                                 Samples
                             </Button>
@@ -202,10 +202,15 @@ export default function EditorPage() {
                             <DropdownMenuItem onClick={() => setDocText(doc3)}>Sample 3</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
-                    <Button className="text-sm" onClick={generateEvents}>
+                    <Button className="text-sm" onClick={generateEvents} variant={!events?.length ? "default" : "secondary"}>
                         <Sparkles className="mr-2 h-4 w-4" />
                         Generate <span className="xs:hidden">&nbsp;Events</span>
                     </Button>
+                    <div className={"hidden " + (!events?.length ? "" : "md:block")}>
+                        <Button className="text-sm" onClick={submitInfo}>
+                            Export
+                        </Button>
+                    </div>
                 </div>
 
             </div>

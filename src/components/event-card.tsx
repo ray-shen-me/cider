@@ -35,7 +35,7 @@ const formatStartEnd = (start: Date, end: Date): string => {
 }
 
 const dateArrayToDate = (dateArray: number[]): Date => {
-    return new Date(`${dateArray[1]}-${dateArray[2]}-${dateArray[0]} ${dateArray[3] || 0}:${dateArray[4] || 0}`);
+    return new Date(`${dateArray[1]}-${dateArray[2]}-${dateArray[0].toString().padStart(2, '0')} ${(dateArray[3] || 0).toString().padStart(2, '0')}:${dateArray[4] || 0}`);
 }
 
 export default function EventCard(props: { event: CalendarEvent }) {
