@@ -11,13 +11,12 @@ Create calendar events on a live demo of Cider at https://www.ciderai.tech/
 Use [git](https://git-scm.com/downloads) to install Cider.
 
 ```bash
-git clone https://github.com/ray-shen-me/cider
-```
+git clone https://github.com/ray-shen-me/cider.git
 
 ## 💻 Run Cider locally
 
 ```bash
-git clone https://github.com/ray-shen-me/cider
+git clone https://github.com/ray-shen-me/cider.git
 npm install
 npm run dev
 ```
@@ -33,15 +32,11 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Please make sure to update tests as appropriate.
 
-## Screenshots
+<!-- ## Screenshots
 
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
-
-
-
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here) -->
 
 ## Authors
 
