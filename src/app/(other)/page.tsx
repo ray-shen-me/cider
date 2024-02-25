@@ -16,6 +16,13 @@ export default function Home() {
           into your apps. Free. Open Source. And Next.js 13 Ready.
         </p>
       </div>
+      <div className="relative max-w-[300px] aspect-square">
+        <img src="/Frame1.svg" alt="Frame 1" className="absolute top-0 left-0 anim1 drop-shadow-md"/>
+        <img src="/Frame2.svg" alt="Frame 1" className="absolute top-0 left-0 anim2 drop-shadow-md"/>
+        <img src="/Frame3.svg" alt="Frame 1" className="absolute top-0 left-0 anim3 drop-shadow-md"/>
+        <img src="/Frame4.svg" alt="Frame 1" className="absolute top-0 left-0 anim4 drop-shadow-md"/>
+
+        </div>
       <div className="flex gap-4">
         <Link
           rel="noreferrer"
