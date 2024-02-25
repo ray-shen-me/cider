@@ -107,7 +107,7 @@ export default function EventCard(props: { event: CalendarEvent }) {
                     <DialogHeader>
                         <DialogTitle>Edit event</DialogTitle>
                         <DialogDescription>
-                            Make changes to your event here. Click save when you're done.
+                            Make changes to your event here. Click save when you&#39;re done.
                         </DialogDescription>
                     </DialogHeader>
                     <div className="grid gap-4">

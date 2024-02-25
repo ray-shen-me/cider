@@ -12,6 +12,8 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 
+import doc1 from '/samples/doc1.txt';
+import doc2 from '/samples/doc2.txt';
 import SiteHeader from "@/components/site-header";
 import { useEffect, useRef, useState } from "react";
 import { CalendarEvent } from "@/lib/types";
@@ -171,24 +173,26 @@ export default function EditorPage() {
         generateEvents();
     }
 
+    function sampleText(sample: number) {
+        if(sample == 1){
+            setDocText(doc1);
+        }
+        if(sample == 2){
+            setDocText(doc2);
+        }
+
+    }
+
     return (
         <div className="container flex-1 flex flex-col items-stretch gap-4 py-6">
             <div className="flex flex-row justify-between items-center">
                 <div>
                     <h2 className="text-lg font-semibold hidden xs:block">Create Events from Doc</h2>
                 </div>
-                <div className="flex flex-row gap-4">
-                    <Button className="text-sm" onClick={generateEvents} variant={!events?.length ? "default" : "secondary"}>
-                        <Sparkles className="mr-2 h-4 w-4" />
-                        Generate <span className="xs:hidden">&nbsp;Events</span>
-                    </Button>
-                    <div className={"hidden " + (!events?.length ? "" : "md:block")}>
-                        <Button className="text-sm" onClick={submitInfo}>
-                            Export
-                        </Button>
-                    </div>
-                </div>
-
+                <Button className="text-sm" onClick={generateEvents}>
+                    <Sparkles className="mr-2 h-4 w-4" />
+                    Generate <span className="xs:hidden">&nbsp;Events</span>
+                </Button>
 
             </div>
             <div className="flex flex-col flex-grow items-start gap-6">
@@ -218,6 +222,8 @@ export default function EditorPage() {
                                     <Button type="button" onClick={() => fileInputRef.current?.click()} variant="secondary" size="icon" aria-label="Upload file">
                                         <UploadIcon className="h-4 w-4" />
                                     </Button>
+                                    <Button type="button" className={"mx-1"} onClick={e => setDocText(doc1)}>Sample 1</Button>
+                                    <Button type="button" className={"mx-1"} onClick={e => setDocText(doc2)}>Sample 2</Button>
                                 </label>
 
 
