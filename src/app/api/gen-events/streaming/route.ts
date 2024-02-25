@@ -25,12 +25,13 @@ export async function POST(request: Request) {
                 },
                 {
                     role: 'user',
-                    content: `Document text: \n${documentText}`
+                    content: `Document text: \n${documentText}`,
                 }
             ],
             model: 'gpt-3.5-turbo-1106',
             response_format: { type: 'json_object' },
             stream: true,
+            temperature: 0.1
         });
 
         const stream = OpenAIStream(completion);
