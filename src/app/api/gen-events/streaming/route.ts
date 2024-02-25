@@ -18,7 +18,7 @@ export async function POST(request: Request) {
                         `You are an event planning assistant helping a user create calendar events from a document they will provide to you.
                         Today is ${new Date().toDateString()}.
                         Make sure to create events each for due date and thing the user should be reminded about, like submitting forms.
-                        Make events without specified times last the whole day.
+                        Events without specified times should last the whole day.
                         Respond with a JSON object with these *exact* properties:
                         - "events": an array of events, each exactly following the JSON schema below, or an empty array if no events are found.
                         For each event in "events", use the following schema: ${schemaString}`
@@ -31,7 +31,7 @@ export async function POST(request: Request) {
             model: 'gpt-3.5-turbo-1106',
             response_format: { type: 'json_object' },
             stream: true,
-            temperature: 0.1
+            temperature: 0
         });
 
         const stream = OpenAIStream(completion);
