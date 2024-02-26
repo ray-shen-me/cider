@@ -1,6 +1,6 @@
 # [🍎  Cider](https://ciderai.tech)
 
-Quickly create calendar events with Cider! Cider is an AI powered document analyzer that automatically creates .ICS calendar files with titles, dates, descriptions, locations, attendees, and more. 
+Quickly create calendar events with Cider! Cider is an AI powered document analyzer that automatically creates .ICS calendar files with titles, dates, descriptions, locations, attendees, and more. Created at [HackTJ 11.0](https://hacktj.org/) winning the Best Lifestyle Hack category!
 
 ## [🌍 Live demo](https://ciderai.tech)
 
@@ -36,12 +36,6 @@ To build the UI, we used Next.js as the framework, Tailwind.css for styling, and
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
-
-<!-- ## Screenshots
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here) -->
 
 ## Authors
 
