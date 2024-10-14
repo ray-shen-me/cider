@@ -17,7 +17,7 @@ export default function SiteHeader({ children }: PropsWithChildren) {
                 <div className="margin-auto"></div>
                 <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
                     <nav className="flex items-center">
-                        <Link href="https://github.com" target="_blank" rel="noreferrer">
+                        <Link href="https://github.com/ray-shen-me/cider" target="_blank" rel="noreferrer">
                             <div
                                 className={buttonVariants({
                                     size: "icon",
